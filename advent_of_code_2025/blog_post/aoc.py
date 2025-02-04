@@ -1,16 +1,17 @@
 def solve(page):
     total = 0
     rules = {} 
-    parsing_rules = True
+    parsing_rules = True # the start of the page contains the rules
     for line in page.splitlines():                                          
 
         if line == "":
             parsing_rules = False
-            continue
+            continue # skip the whiteline
 
         if parsing_rules:
             x, y = line.split("|")
             rules[x] = rules.get(x, []) + [y]
+
         else: 
             update = line.split(",")
             for i in range(len(update)):
@@ -24,4 +25,3 @@ def solve(page):
                 # if outer loop completed without break, update is valid
                 total += int(update[len(update) // 2])
     return total
-
